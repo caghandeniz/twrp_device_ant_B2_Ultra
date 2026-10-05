@@ -119,3 +119,6 @@ BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
 
 # Fix vendor_boot recovery ramdisk build error
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
+
+# Explicitly enable building vendor_boot image
+BOARD_BUILD_VENDOR_BOOT_IMAGE := true
