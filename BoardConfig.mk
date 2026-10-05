@@ -116,3 +116,6 @@ TW_INCLUDE_REPACKTOOLS := true
 
 # Recovery ramdisk lives in vendor_boot on this device
 BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
+
+# Fix vendor_boot recovery ramdisk build error
+BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
