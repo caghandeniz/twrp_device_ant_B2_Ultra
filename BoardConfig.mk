@@ -22,7 +22,6 @@ AB_OTA_PARTITIONS += \
     vbmeta_system \
     vbmeta_vendor \
     product
-BOARD_USES_RECOVERY_AS_BOOT := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -114,3 +113,6 @@ TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
+
+# Recovery ramdisk lives in vendor_boot on this device
+BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
