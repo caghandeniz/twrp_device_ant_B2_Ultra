@@ -48,26 +48,28 @@ TARGET_NO_BOOTLOADER := true
 # Display
 TARGET_SCREEN_DENSITY := 480
 
-# Kernel Headers & Args
-BOARD_BOOT_HEADER_VERSION := 4
+# Kernel & Header Settings
 BOARD_BOOTIMG_HEADER_VERSION := 4
+BOARD_BOOT_HEADER_VERSION := 4
 BOARD_KERNEL_BASE := 0x3fff8000
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_RAMDISK_OFFSET := 0x26f08000
 BOARD_KERNEL_TAGS_OFFSET := 0x07c88000
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_KERNEL_CONFIG := B2_Ultra_defconfig
 TARGET_KERNEL_SOURCE := kernel/ant/B2_Ultra
 
-# Kernel & DTB - Prebuilt Configuration (Koşulsuz Doğrudan Tanım)
-TARGET_PREBUILT_KERNEL := device/ant/B2_Ultra/prebuilt/kernel
-BOARD_PREBUILT_DTBIMAGE := device/ant/B2_Ultra/prebuilt/dtb.img
-TARGET_PREBUILT_DTB := device/ant/B2_Ultra/prebuilt/dtb.img
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+# Kernel - Prebuilt (Ninja Hatası Yapmayan Orijinal Mantık)
+TARGET_FORCE_PREBUILT_KERNEL := true
+ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+endif
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
@@ -90,7 +92,7 @@ BOARD_ANT_DYNAMIC_PARTITIONS_SIZE := 9122611200
 # Platform
 TARGET_BOARD_PLATFORM := mt6789
 
-# Recovery & Graphics Fixes
+# Recovery & Display Fixes
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 RECOVERY_GRAPHICS_FORCE_USE_LINELENGTH := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
@@ -98,7 +100,7 @@ TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-# Security Patch & Platform Version
+# Security Patch & Platform Version Fix
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 12
