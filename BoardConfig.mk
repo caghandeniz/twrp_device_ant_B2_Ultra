@@ -63,15 +63,11 @@ BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_KERNEL_CONFIG := B2_Ultra_defconfig
 TARGET_KERNEL_SOURCE := kernel/ant/B2_Ultra
 
-# Kernel - Prebuilt (DTB Düzeltmesi)
-TARGET_FORCE_PREBUILT_KERNEL := true
-ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTBIMAGE := $(DEVICE_PATH)/prebuilt/dtb.img
-TARGET_PREBUILT_DTB := $(BOARD_PREBUILT_DTBIMAGE)
-BOARD_MKBOOTIMG_ARGS += --dtb $(BOARD_PREBUILT_DTBIMAGE)
+# Kernel & DTB - Prebuilt Configuration (Koşulsuz Doğrudan Tanım)
+TARGET_PREBUILT_KERNEL := device/ant/B2_Ultra/prebuilt/kernel
+BOARD_PREBUILT_DTBIMAGE := device/ant/B2_Ultra/prebuilt/dtb.img
+TARGET_PREBUILT_DTB := device/ant/B2_Ultra/prebuilt/dtb.img
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-endif
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
