@@ -23,6 +23,9 @@ PRODUCT_MANUFACTURER := ant
 
 PRODUCT_GMS_CLIENTID_BASE := android-ant
 
+# Android 12 FBE Şifre Çözme Uyumluluğu İçi API Seviyesi
+PRODUCT_SHIPPING_API_LEVEL := 31
+
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="B2_Ultra_eea-user 12 SP1A.210812.016 1772513660 release-keys"
 
